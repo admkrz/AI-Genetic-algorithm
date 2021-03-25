@@ -1,6 +1,8 @@
 import os
 
+import constants
 import helpers
+import random_algorithm
 from board import Board
 from genetic_algorithm import GeneticAlgorithm
 from random_algorithm import RandomAlgorithm
@@ -53,8 +55,21 @@ def run():
     print("Cost: " + str(cost))
     helpers.plot_board(best_paths, cost)
     '''
-    genetic_algorithm=GeneticAlgorithm(board)
+    ra = random_algorithm.RandomAlgorithm(board)
+    population = ra.resolve_paths(constants.POPULATION_COUNT)
+    constants.POPULATION_COUNT = 50
+    genetic_algorithm = GeneticAlgorithm(board, filename, population)
     genetic_algorithm.get_best_paths()
+    constants.POPULATION_COUNT = 100
+    genetic_algorithm = GeneticAlgorithm(board, filename, population)
+    genetic_algorithm.get_best_paths()
+    constants.POPULATION_COUNT = 150
+    genetic_algorithm = GeneticAlgorithm(board, filename, population)
+    genetic_algorithm.get_best_paths()
+    constants.POPULATION_COUNT = 250
+    genetic_algorithm = GeneticAlgorithm(board, filename, population)
+    genetic_algorithm.get_best_paths()
+
 
 
 
