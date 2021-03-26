@@ -55,7 +55,6 @@ class GeneticAlgorithm:
         while current_sum < choose_individual and index < population_count - 1:
             current_sum += weights[index]
             index += 1
-        print(round(sum(weights)))
         return self.population[index - 1]
 
     def crossover(self, parent1, parent2):
@@ -289,16 +288,16 @@ class GeneticAlgorithm:
             avg_cost = np.average(np_costs)
             std_cost = np.std(np_costs)
             best_board = new_generation[costs.index(best_cost)]
-            print(best_board)
+            print(str(i)+" generation")
             cost_detail = dict()
             cost_detail["Length"] = helpers.get_length_cost(best_board)
             cost_detail["Segments"] = helpers.get_segment_count_cost(best_board)
             cost_detail["Cross"] = helpers.get_cross_cost(helpers.get_segments_points(best_board))
             file.write(str(best_cost) + ";" + str(worst_cost) + ";" + str(avg_cost) + ";" + str(std_cost)+"\n")
             self.population = new_generation
-            #helpers.plot_board(best_board, cost_detail, i)
+            helpers.plot_board(best_board, cost_detail, i)
         file.close()
-        #plt.show()
+        plt.show()
 
 
 '''

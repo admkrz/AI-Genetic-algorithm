@@ -1,6 +1,8 @@
 import copy
 import random
 
+import numpy as np
+
 import helpers
 from direction import Direction
 from segment import Segment
@@ -80,6 +82,7 @@ class RandomAlgorithm:
         costs = []
         for board in boards:
             costs.append(helpers.cost_function(board))
+        print('Best: {}, Worst: {}, Avg: {}, Std: {}'.format(min(costs), max(costs), np.average(costs), np.std(np.array(costs))))
         best_board = boards[costs.index(min(costs))]
         cost_detail = dict()
         cost_detail["Length"] = helpers.get_length_cost(best_board)

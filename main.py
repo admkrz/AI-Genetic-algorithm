@@ -1,5 +1,7 @@
 import os
+from copy import deepcopy
 
+from matplotlib import pyplot as plt
 import constants
 import helpers
 import random_algorithm
@@ -45,7 +47,7 @@ def run():
     board_size, paths_coordinates = loadData(filename)
     board = create_board(board_size, paths_coordinates)
     print(board)
-    '''
+
     random_algorithm = RandomAlgorithm(board)
     print("-----------------------------------------------")
     n = int(input("Podaj liczbe powtorzen algorytmu losowego:\n"))
@@ -53,24 +55,39 @@ def run():
     print("-----------------------------------------------")
     print(best_paths)
     print("Cost: " + str(cost))
-    helpers.plot_board(best_paths, cost)
+    helpers.plot_board(best_paths, cost, "Random")
+    plt.show()
+
+    ra = RandomAlgorithm(board)
     '''
-    ra = random_algorithm.RandomAlgorithm(board)
     population = ra.resolve_paths(constants.POPULATION_COUNT)
     constants.POPULATION_COUNT = 50
-    genetic_algorithm = GeneticAlgorithm(board, filename, population)
+    genetic_algorithm = GeneticAlgorithm(deepcopy(board), filename, deepcopy(population))
     genetic_algorithm.get_best_paths()
     constants.POPULATION_COUNT = 100
-    genetic_algorithm = GeneticAlgorithm(board, filename, population)
+    population = ra.resolve_paths(constants.POPULATION_COUNT)
+    genetic_algorithm = GeneticAlgorithm(deepcopy(board), filename, deepcopy(population))
     genetic_algorithm.get_best_paths()
     constants.POPULATION_COUNT = 150
-    genetic_algorithm = GeneticAlgorithm(board, filename, population)
+    population = ra.resolve_paths(constants.POPULATION_COUNT)
+    genetic_algorithm = GeneticAlgorithm(deepcopy(board), filename, deepcopy(population))
     genetic_algorithm.get_best_paths()
-    constants.POPULATION_COUNT = 250
-    genetic_algorithm = GeneticAlgorithm(board, filename, population)
+    population = ra.resolve_paths(constants.POPULATION_COUNT)
+
+    genetic_algorithm = GeneticAlgorithm(deepcopy(board), filename, deepcopy(population))
     genetic_algorithm.get_best_paths()
-
-
+    constants.GENERATION_COUNT = 20
+    genetic_algorithm = GeneticAlgorithm(deepcopy(board), filename, deepcopy(population))
+    genetic_algorithm.get_best_paths()
+    constants.GENERATION_COUNT = 50
+    genetic_algorithm = GeneticAlgorithm(deepcopy(board), filename, deepcopy(population))
+    genetic_algorithm.get_best_paths()
+    constants.GENERATION_COUNT = 100
+    genetic_algorithm = GeneticAlgorithm(deepcopy(board), filename, deepcopy(population))
+    genetic_algorithm.get_best_paths()
+    constants.GENERATION_COUNT = 200
+    genetic_algorithm = GeneticAlgorithm(deepcopy(board), filename, deepcopy(population))
+    genetic_algorithm.get_best_paths()'''
 
 
 if __name__ == '__main__':
