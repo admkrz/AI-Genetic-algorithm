@@ -57,20 +57,8 @@ def run():
     '''
     ra = random_algorithm.RandomAlgorithm(board)
     population = ra.resolve_paths(constants.POPULATION_COUNT)
-    constants.POPULATION_COUNT = 50
     genetic_algorithm = GeneticAlgorithm(board, filename, population)
     genetic_algorithm.get_best_paths()
-    constants.POPULATION_COUNT = 100
-    genetic_algorithm = GeneticAlgorithm(board, filename, population)
-    genetic_algorithm.get_best_paths()
-    constants.POPULATION_COUNT = 150
-    genetic_algorithm = GeneticAlgorithm(board, filename, population)
-    genetic_algorithm.get_best_paths()
-    constants.POPULATION_COUNT = 250
-    genetic_algorithm = GeneticAlgorithm(board, filename, population)
-    genetic_algorithm.get_best_paths()
-
-
 
 
 if __name__ == '__main__':
